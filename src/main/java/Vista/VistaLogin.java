@@ -69,7 +69,7 @@ Menu menu = new Menu();
         jButtonCancelar.addActionListener(oyenteCancelarLogin);
     }
     
-    public void cerrar()
+    private void cerrar()
     {
         int opcion=0;
         opcion = JOptionPane.showConfirmDialog(this,"¿Seguro que desea cerrar el programa?","Aviso",JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE);

@@ -123,7 +123,7 @@ public class VistaPais extends javax.swing.JFrame {
             {
                 try
                 {
-                    crearDatos();
+                    crearDatos( Integer.parseInt(txtCodigo.getText()), txtNombre.getText(), jComboBoxContinente.getSelectedItem().toString() , Integer.parseInt(txtPoblacion.getText()));
                 }
                 catch(NumberFormatException ex)
                 {
@@ -220,29 +220,30 @@ public class VistaPais extends javax.swing.JFrame {
     }
     
     // metodo validar datos
-    public boolean validarDatos()
+    private boolean validarDatos()
     {
+        boolean esValida=true;
         if(txtCodigo.getText().length() == 0 || txtCodigo.getText().length() != 3)
         {
             JOptionPane.showMessageDialog(null,"Debes Ingresar un código Valido - Minimo 3 Digitos","Sistema",JOptionPane.WARNING_MESSAGE );
             txtCodigo.requestFocus();
-            return false;
+           esValida=false;
         }
         
         if(txtNombre.getText().length() == 0)
         {
             JOptionPane.showMessageDialog(null,"Debes Ingresar un Nombre","Sistema",JOptionPane.WARNING_MESSAGE );
             txtNombre.requestFocus();
-            return false;
+           esValida=false;
         }
         
         if(txtPoblacion.getText().length() == 0)
         {
             JOptionPane.showMessageDialog(null,"Debes Ingresar una Poblacion","Sistema",JOptionPane.WARNING_MESSAGE );
             txtPoblacion.requestFocus();
-            return false;
+            esValida=false;
         }
-        return true;
+        return esValida;
     }
     
     // metodo buscar por codigo
@@ -302,20 +303,20 @@ public class VistaPais extends javax.swing.JFrame {
     }
     
     // metodo guardar dato en el tabla
-    public void crearDatos()
+    public boolean crearDatos(int codigo, String nombre, String continente, int poblacion)
     {
         String resp;
-        
+        boolean esValida=true; 
         if(!validarDatos())
         {
-            return;
+            esValida=false;
+            return esValida;
         }
           
-        int codigo2 = Integer.parseInt(txtCodigo.getText());
-        String nombre2 = txtNombre.getText();
-        String continente2 = jComboBoxContinente.getSelectedItem().toString();
-        int poblacion2 = Integer.parseInt(txtPoblacion.getText());
-            
+        int codigo2 =codigo;
+        String nombre2 = nombre;
+        String continente2 = continente;
+        int poblacion2 =poblacion;
         resp = this.CONTROL.insertar(codigo2,nombre2,continente2,poblacion2);
         if(resp.equals("OK"))
         {
@@ -327,7 +328,12 @@ public class VistaPais extends javax.swing.JFrame {
             txtCodigo.setText("");
             txtNombre.setText("");
             txtPoblacion.setText("");
-        }     
+            esValida=true;
+            
+        }     else {
+            esValida=false;
+        }
+        return esValida;
     }
     
     // mostrar datos en la tabla
