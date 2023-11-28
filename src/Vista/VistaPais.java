@@ -214,11 +214,11 @@ public class VistaPais extends javax.swing.JFrame {
     public void guardarRegistro(String codigo, String nombre, String continente, int poblacion){
         String resp;
         resp=this.CONTROL.insertar(codigo, nombre, continente, poblacion);
-        if(resp.equals("OK")){                
-            JOptionPane.showMessageDialog(null, "ATENCION, registro almacenado correctamente...", "Error", JOptionPane.ERROR_MESSAGE);
+        if(resp.equals(true)){                
+            JOptionPane.showMessageDialog(null, resp, "Error", JOptionPane.ERROR_MESSAGE);
             this.limpiar();         
         }else{
-            JOptionPane.showMessageDialog(null, "ATENCION, ocurrio un error ...", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, resp, "Error", JOptionPane.ERROR_MESSAGE);
         }    
     }
  
@@ -228,6 +228,7 @@ public class VistaPais extends javax.swing.JFrame {
     
     // eliminar datos de la tabla
     
+    // metodo listar muestra una nomina de paises que coincidan con el texto
     private void listar(String texto){
         tablaListado.setModel(this.CONTROL.listar(texto));          
         TableRowSorter orden= new TableRowSorter(tablaListado.getModel());

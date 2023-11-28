@@ -6,14 +6,13 @@ package Modelo;
 
 import Controlador.Usuario;
 import Modelo.interfaces.CrudSimpleInterfaces;
-import Modelo.interfaces.NewInterface;
 import java.util.List;
 
 /**
  *
  * @author conta
  */
-public class UsuarioDAO implements CrudSimpleInterfaces <Usuario>, NewInterface<Object> {
+public class UsuarioDAO implements CrudSimpleInterfaces <Usuario> {
 
     @Override
     public List<Usuario> listar(String texto) {
@@ -31,33 +30,19 @@ public class UsuarioDAO implements CrudSimpleInterfaces <Usuario>, NewInterface<
     }
 
     @Override
-    public boolean eliminar(int id) {
+    public boolean eliminar(String id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    @Override
-    public boolean desactivar(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public boolean activar(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public int total() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
+     @Override
     public boolean existe(String texto) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public boolean prueba(Object obj) {
+    public List<Usuario> buscar(String texto) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
+        
 }

@@ -6,20 +6,20 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 public class Conexion {
-         //Constante para conectarse con el servidor Santo Tomas
+       /*   //Constante para conectarse con el servidor Santo Tomas
         private final String DRIVER="com.mysql.cj.jdbc.Driver";
         private final String URL="jdbc:mysql://10.68.0.251:18083/";
         private final String DB="world";
         private final String USER="root";
-        private final String PASSWORD="alpro18"; 
+        private final String PASSWORD="alpro18"; */
         
     
-       /* //Constante para conectarse con el servidor de tu PC
+       //Constante para conectarse con el servidor de tu PC
         private final String DRIVER="com.mysql.cj.jdbc.Driver";
         private final String URL="jdbc:mysql://localhost:3306/";
         private final String DB="world";
         private final String USER="root";
-        private final String PASSWORD="data23"; */
+        private final String PASSWORD="data23"; 
     
         public Connection cadena;
         public static Conexion instancia;

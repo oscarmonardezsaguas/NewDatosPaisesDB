@@ -44,28 +44,31 @@ public class PaisDAO  implements CrudSimpleInterfaces<Pais>{
         }
         return registros;
     }
-
    
     @Override
-    public boolean eliminar(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public boolean eliminar(String texto) {
+     resp=false;
+        try {
+            ps=CON.conectar().prepareStatement("DELETE FROM country WHERE code=?");
+            ps.setString(1, texto);
+            rs=ps.executeQuery();
+            rs.last();
+            if(rs.getRow()>0){
+                resp=true;
+            }           
+            ps.close();
+            rs.close();
+        }  catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        } finally{
+            ps=null;
+            rs=null;
+            CON.desconectar();
+        }
+        return resp; 
     }
-
-    @Override
-    public boolean desactivar(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public boolean activar(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public int total() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
+     
+    // verifica que el registro ingresado no 
     @Override
     public boolean existe(String texto) {
        resp=false;
@@ -89,6 +92,7 @@ public class PaisDAO  implements CrudSimpleInterfaces<Pais>{
         return resp;
     }
 
+    // metodo insertar registro
     @Override
     public boolean insertar(Pais obj) {
     resp=false;
@@ -113,8 +117,50 @@ public class PaisDAO  implements CrudSimpleInterfaces<Pais>{
     }
 
     @Override
-    public boolean actualizar(Pais obj) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public boolean actualizar(Pais obj) {   
+        resp=false;
+        try {
+            ps=CON.conectar().prepareStatement("UPDATE pais SET code=?, codigo=?, name=?, continent=?, population=? WHERE code=?");
+            ps.setString(1, obj.getCodePais());
+            ps.setString(2, obj.getNombre());
+            ps.setString(3, obj.getContinente());
+            ps.setInt(4, obj.getPoblacion());
+
+            if (ps.executeUpdate()>0){
+                resp=true;
+            }
+            ps.close();
+        }  catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        } finally{
+            ps=null;
+            CON.desconectar();
+        }
+        return resp;
     }
+
+    @Override
+    public  List<Pais> buscar (String texto) {
+        List<Pais> registros=new ArrayList();
+        try {
+          ps=CON.conectar().prepareStatement("SELECT  code, name, continent, population FROM country  WHERE code= ?");          
+            ps.setString(1, texto);
+            rs=ps.executeQuery();
+            while(rs.next()){               
+                  registros.add(new Pais(rs.getString(1),rs.getString(2),rs.getString(3),rs.getInt(4)));
+            }
+            ps.close();
+            rs.close();         
+        } catch (SQLException e) {
+            JOptionPane.showConfirmDialog(null, e.getMessage());
+        } finally {
+            ps=null;
+            rs=null;
+            CON.desconectar();
+        }
+        return registros;
+    }
+     
+
     
 }

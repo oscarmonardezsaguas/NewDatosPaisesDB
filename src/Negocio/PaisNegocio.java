@@ -71,9 +71,30 @@ public class PaisNegocio
                 return "ATENCION, ocurrio un error al guardar el registro.";
             }
         }
-    }
+    }           
   
-
-    
-    
+   // metodo para actualizar datos en la tabla
+  public String actualizar(String codigo, String nombre, String continente, int poblacion){
+        if (DATOS.existe(nombre)){
+            return "ATENCION, el registro ya existe...";
+        }else{
+            obj.setCodePais(codigo);
+            obj.setNombre(nombre);
+            obj.setContinente(continente);
+            obj.setPoblacion(poblacion);         
+            if (DATOS.actualizar(obj)){
+                return "ATENCION, registro almacenado correctamente...";
+            }else{
+                return "ATENCION, ocurrio un error al guardar el registro.";
+            }
+        }
+    }      
+  
+   // metodo eliminar paises
+ public String eliminar(String texto){
+     
+        return null;     
+    }
+       
+        
 }
